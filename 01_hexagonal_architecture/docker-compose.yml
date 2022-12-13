@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app: 
+    build: .
+    command: npm start
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+
+# Subnet is used because of a problem with wsl. 
+# got this ipv4 address from wikipedia (https://en.wikipedia.org/wiki/Private_network#Private_IPv4_addresses)
+# remember learning more about network later
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/8
