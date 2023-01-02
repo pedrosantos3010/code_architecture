@@ -1,3 +1,4 @@
+import { ProductInterface } from "./ProductInterface";
 import { ProductStatus } from "./ProductStatus";
 import { v4 as uuidv4 } from "uuid";
 
