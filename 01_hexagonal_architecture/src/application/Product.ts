@@ -1,4 +1,5 @@
 import { ProductStatus } from "./ProductStatus";
+import { v4 as uuidv4 } from "uuid";
 
 export class Product implements ProductInterface {
   public get id(): string {
@@ -18,10 +19,10 @@ export class Product implements ProductInterface {
   }
 
   public constructor(
-    private _id: string,
     private _name: string,
-    private _status: ProductStatus,
-    private _price: number
+    private _price: number = 0,
+    private _status: ProductStatus = ProductStatus.DISABLED,
+    private _id: string = uuidv4()
   ) {}
 
   public isValid(): boolean {

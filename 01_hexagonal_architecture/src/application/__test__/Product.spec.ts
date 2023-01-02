@@ -1,4 +1,3 @@
-import { subtle } from "crypto";
 import { Product } from "../Product";
 import { ProductStatus } from "../ProductStatus";
 
@@ -6,10 +5,10 @@ describe("Product", () => {
   describe("when trying to enable", () => {
     it("should be able to enable with price greater than zero", () => {
       const product = new Product(
-        "id",
         "Product example",
+        10,
         ProductStatus.DISABLED,
-        10
+        "id"
       );
 
       product.enable();
@@ -19,10 +18,10 @@ describe("Product", () => {
 
     it("should throw if the price is not greater than zero", () => {
       const product = new Product(
-        "id",
         "Product example",
+        0,
         ProductStatus.DISABLED,
-        0
+        "id"
       );
 
       expect(() => product.enable()).toThrowError(
@@ -32,10 +31,10 @@ describe("Product", () => {
 
     it("should throw if the product is already enabled", () => {
       const product = new Product(
-        "id",
         "Product example",
+        10,
         ProductStatus.ENABLED,
-        10
+        "id"
       );
 
       expect(() => product.enable()).toThrowError(
@@ -47,10 +46,10 @@ describe("Product", () => {
   describe("when trying to disable", () => {
     it("should be able to disable if the price is zero", () => {
       const product = new Product(
-        "id",
         "Product example",
+        0,
         ProductStatus.ENABLED,
-        0
+        "id"
       );
 
       product.disable();
@@ -59,10 +58,10 @@ describe("Product", () => {
 
     it("should throw if the price is not zero", () => {
       const product = new Product(
-        "id",
         "Product example",
+        10,
         ProductStatus.ENABLED,
-        10
+        "id"
       );
 
       expect(() => product.disable()).toThrowError(
@@ -74,10 +73,10 @@ describe("Product", () => {
   describe("when verifying if is valid", () => {
     it("should throw if price is smaller than zero", () => {
       const product = new Product(
-        "id",
         "Product example",
+        -10,
         ProductStatus.ENABLED,
-        -10
+        "id"
       );
 
       expect(() => product.isValid()).toThrowError(
@@ -87,10 +86,10 @@ describe("Product", () => {
 
     it("should return true if product is valid", () => {
       const product = new Product(
-        "id",
         "Product example",
+        10,
         ProductStatus.ENABLED,
-        10
+        "id"
       );
 
       expect(product.isValid()).toBe(true);
