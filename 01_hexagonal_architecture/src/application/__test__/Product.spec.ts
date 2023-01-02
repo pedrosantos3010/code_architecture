@@ -70,4 +70,30 @@ describe("Product", () => {
       );
     });
   });
+
+  describe("when verifying if is valid", () => {
+    it("should throw if price is smaller than zero", () => {
+      const product = new Product(
+        "id",
+        "Product example",
+        ProductStatus.ENABLED,
+        -10
+      );
+
+      expect(() => product.isValid()).toThrowError(
+        "the price must be greater or equal than zero"
+      );
+    });
+
+    it("should return true if product is valid", () => {
+      const product = new Product(
+        "id",
+        "Product example",
+        ProductStatus.ENABLED,
+        10
+      );
+
+      expect(product.isValid()).toBe(true);
+    });
+  });
 });

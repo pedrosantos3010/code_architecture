@@ -25,7 +25,15 @@ export class Product implements ProductInterface {
   ) {}
 
   public isValid(): boolean {
-    throw new Error("Method not implemented.");
+    if (!this.status) {
+      this.disable();
+    }
+
+    if (this.price < 0) {
+      throw new Error("the price must be greater or equal than zero");
+    }
+
+    return true;
   }
 
   public enable(): void {
