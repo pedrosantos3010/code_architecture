@@ -43,4 +43,31 @@ describe("Product", () => {
       );
     });
   });
+
+  describe("when trying to disable", () => {
+    it("should be able to disable if the price is zero", () => {
+      const product = new Product(
+        "id",
+        "Product example",
+        ProductStatus.ENABLED,
+        0
+      );
+
+      product.disable();
+      expect(product.status).toBe(ProductStatus.DISABLED);
+    });
+
+    it("should throw if the price is not zero", () => {
+      const product = new Product(
+        "id",
+        "Product example",
+        ProductStatus.ENABLED,
+        10
+      );
+
+      expect(() => product.disable()).toThrowError(
+        "The price must be zero in order to have the product disabled"
+      );
+    });
+  });
 });

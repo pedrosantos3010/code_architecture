@@ -43,6 +43,11 @@ export class Product implements ProductInterface {
   }
 
   public disable(): void {
-    throw new Error("Method not implemented.");
+    if (this.price != 0) {
+      throw Error(
+        "The price must be zero in order to have the product disabled"
+      );
+    }
+    this._status = ProductStatus.DISABLED;
   }
 }
