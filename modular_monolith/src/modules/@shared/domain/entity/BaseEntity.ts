@@ -18,5 +18,7 @@ export class BaseEntity implements AggregateRoot {
 
   public constructor(id = new Id()) {
     this._id = id;
+    this._createdAt = new Date();
+    this._updatedAt = new Date();
   }
 }
