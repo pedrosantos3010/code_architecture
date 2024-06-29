@@ -1,13 +1,15 @@
+import { Product } from "@product-adm/domain/Product";
 import { AddProductUseCase } from "./AddProductUseCase";
+import { Id } from "@shared/domain/value-object/Id";
 
 describe("AddProductUseCase", () => {
   it("should be able to add a product", async () => {
-    const productRepository = {
+    const mockProductRepository = {
       add: jest.fn(),
       find: jest.fn(),
     };
 
-    const sut = new AddProductUseCase(productRepository);
+    const sut = new AddProductUseCase(mockProductRepository);
 
     const product = {
       name: "Product 1",
@@ -17,15 +19,17 @@ describe("AddProductUseCase", () => {
     };
     const productOutput = await sut.execute(product);
 
-    expect(productRepository.add).toHaveBeenCalledWith({
-      _id: { _id: expect.any(String) },
-      _name: product.name,
-      _description: product.description,
-      _purchasePrice: product.purchasePrice,
-      _stock: product.stock,
-      _createdAt: expect.any(Date),
-      _updatedAt: expect.any(Date),
-    });
+    expect(mockProductRepository.add).toHaveBeenCalledWith(
+      new Product(
+        "Product 1",
+        "Product 1 description",
+        100,
+        10,
+        expect.any(Id),
+        expect.any(Date),
+        expect.any(Date)
+      )
+    );
 
     expect(productOutput.id).toBeDefined();
     expect(productOutput.name).toBe(product.name);

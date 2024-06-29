@@ -12,7 +12,7 @@ export class Product extends BaseEntity implements AggregateRoot {
     createdAt?: Date,
     updatedAt?: Date
   ) {
-    super(id);
+    super(id, createdAt, updatedAt);
   }
 
   public get name(): string {
