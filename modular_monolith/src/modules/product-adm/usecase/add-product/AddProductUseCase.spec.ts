@@ -31,12 +31,14 @@ describe("AddProductUseCase", () => {
       )
     );
 
-    expect(productOutput.id).toBeDefined();
-    expect(productOutput.name).toBe(product.name);
-    expect(productOutput.description).toBe(product.description);
-    expect(productOutput.purchasePrice).toBe(product.purchasePrice);
-    expect(productOutput.stock).toBe(product.stock);
-    expect(productOutput.createdAt).toBeDefined();
-    expect(productOutput.updatedAt).toBeDefined();
+    expect(productOutput).toEqual({
+      id: expect.any(String),
+      name: "Product 1",
+      description: "Product 1 description",
+      purchasePrice: 100,
+      stock: 10,
+      createdAt: expect.any(Date),
+      updatedAt: expect.any(Date),
+    });
   });
 });

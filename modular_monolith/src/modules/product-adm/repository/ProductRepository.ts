@@ -1,9 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import { Product } from "@product-adm/domain/Product";
+import { ProductGateway } from "@product-adm/gateway/ProductGateway";
 import { EntityNotFoundError } from "@shared/domain/errors/EntityNotFoundError";
 import { Id } from "@shared/domain/value-object/Id";
 
-export class ProductRepository {
+export class ProductRepository implements ProductGateway {
   public constructor(private _client: PrismaClient) {}
 
   public async add(product: Product): Promise<void> {
@@ -32,7 +33,9 @@ export class ProductRepository {
       productModel.description,
       productModel.purchase_price.toNumber(),
       productModel.stock,
-      new Id(productModel.id)
+      new Id(productModel.id),
+      productModel.created_at,
+      productModel.updated_at
     );
   }
 }
