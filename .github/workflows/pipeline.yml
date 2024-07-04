@@ -13,14 +13,16 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 18.13.0
-        working-directory: ./modular_monolith
 
       - name: Build
         run: |
+          cd modular_monolith
           npm cache clean --force
           npm install --only=prod
           npm run build
 
       - name: Tests
         run: |
+          cd modular_monolith
+          npm install --only=dev
           npm test
